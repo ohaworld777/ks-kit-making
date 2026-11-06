@@ -414,9 +414,10 @@ function kvMark(t){const p=P[i];if(!p||p.kind!=='kitvideo')return;kvT=t;let k=0;
   if(k!==kvCur){kvCur=k;const c=p.chapters[k];document.getElementById('kvNow').textContent=c.title;document.getElementById('kvTag').textContent=c.step?c.step+'단계':'지금';
    document.getElementById('kvDoc').style.visibility=c.slide?'visible':'hidden';const li=lis[k];if(li)li.scrollIntoView({block:'nearest',behavior:'smooth'});}}
 window.addEventListener('message',e=>{if(!/player\.vimeo\.com$/.test(new URL(e.origin).host))return;let d=e.data;try{if(typeof d==='string')d=JSON.parse(d);}catch(_){return;}
-  if(d.event==='ready'){['timeupdate','play','pause','ended'].forEach(ev=>kvPost('addEventListener',ev));}
-  else if(d.event==='timeupdate'&&d.data)kvMark(d.data.seconds);
-  else if(d.event==='play')kvPlaying=true; else if(d.event==='pause'||d.event==='ended')kvPlaying=false;});
+  if(d.event==='ready'){['playProgress','timeupdate','seek','play','pause','finish','ended'].forEach(ev=>kvPost('addEventListener',ev));}
+  else if((d.event==='playProgress'||d.event==='timeupdate'||d.event==='seek')&&d.data)kvMark(d.data.seconds);
+  else if(d.method==='getCurrentTime'&&typeof d.value==='number')kvMark(d.value);
+  else if(d.event==='play')kvPlaying=true; else if(d.event==='pause'||d.event==='ended'||d.event==='finish')kvPlaying=false;});
 function kvAfter(){const p=P[i];kvCur=-1;
   if(p.kind==='kitvideo'){kvPlaying=false;kvMark(0);
     document.getElementById('kvList').addEventListener('click',e=>{const li=e.target.closest('.ch');if(!li)return;e.stopPropagation();const c=p.chapters[+li.dataset.k];kvMark(c.t);kvSeek(c.t);});
