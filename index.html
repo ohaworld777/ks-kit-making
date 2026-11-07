@@ -89,6 +89,17 @@ td.go2{cursor:pointer}td.go2:hover{background:#f3f7ff}
 .mtag{position:absolute;right:12px;top:12px;background:#fff;color:var(--ink);font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .empty{grid-column:1/-1;text-align:center;padding:50px 0;color:var(--muted)}
 .qr{cursor:pointer;background:#fff}
+.shr{text-align:left}.shr h3{text-align:center}.shr .sub{text-align:center;color:var(--muted);font-size:14px;margin:-2px 0 14px}
+.shr .urow{display:flex;gap:8px;align-items:stretch}
+.modal .shr .urow input{width:auto;flex:1 1 auto;min-width:0;font:inherit;font-size:14px;letter-spacing:0;text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:12px;color:var(--ink);background:#f8faff}
+.modal .shr .cp{width:auto;margin:0;flex:0 0 auto;border:0;border-radius:12px;padding:0 16px;font:inherit;font-size:15px;font-weight:900;color:#fff;background:var(--c);cursor:pointer;white-space:nowrap}
+.shr .cp.ok{background:#14a05a}
+.shr .qrw{display:flex;align-items:center;gap:14px;margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:14px}
+.shr .qrw img{width:120px;height:120px;border-radius:8px;flex:none}.shr .qrw p{margin:0;font-size:14px;color:var(--muted);line-height:1.5}.shr .qrw b{color:var(--ink)}
+.modal .shr .ns{width:100%;margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px;font:inherit;font-size:15px;font-weight:800;color:var(--ink);cursor:pointer}
+.shr .ns:hover{border-color:var(--c);color:var(--c)}
+.qr.sh{gap:4px}
+
 .qr.sh{width:auto;padding:0 12px;white-space:nowrap;font-size:14px;color:var(--ink)}
 .qr.sh:hover{border-color:var(--c);color:var(--c)}
 .toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#14a05a;color:#fff;font-weight:800;font-size:15px;padding:12px 22px;border-radius:999px;z-index:60;box-shadow:0 8px 20px rgba(0,0,0,.2);animation:pop .2s ease}
@@ -125,6 +136,7 @@ body.searching .sres{display:block}
  .year{display:none}.legend{flex-wrap:wrap;gap:8px 14px}.legend span{white-space:nowrap}
  .qr.sh{padding:0 10px;font-size:13px}
 }
+html,body{overflow-x:hidden}
 </style></head><body>
 <header><div class="hin"><img id="logo" alt="(주)코리아사이언스"><span class="sep"></span><b>항공드론과학 교구 만들기</b><small>방과후 수업</small><nav class="seg"><a id="segTb" class="" href="https://ohaworld777.github.io/ks-web-textbook/">📘 수업 교재</a><a id="segKit" class="on" href="https://ohaworld777.github.io/ks-kit-making/">🛠️ 교구 만들기</a></nav><label class="search">🔍 <input id="q" placeholder="교구 이름으로 찾기" autocomplete="off"></label></div></header>
 <section class="hero"><div class="heroin"><span class="kicker">2027 KIT MAKING</span><h1>이번 달 <span>교구</span>를 함께 만들어요</h1><p>달을 고르고, 교구 카드를 누르면 만들기 설명서가 열립니다. (달마다 교구 1~4개)</p></div></section>
@@ -181,12 +193,18 @@ const mask=document.getElementById('mask'),modal=document.getElementById('modal'
 function closeM(){mask.classList.remove('on')}
 mask.addEventListener('click',e=>{if(e.target===mask)closeM()});
 document.addEventListener('keydown',e=>{if(e.key==="Escape")closeM()});
+function openShare(it,mi){const M=D[mi];modal.style.setProperty('--c',M.color);
+ modal.innerHTML=`<button class="x" onclick="closeM()">×</button><div class="shr"><h3>🔗 공유하기</h3><p class="sub">${M.short} ${it.lab||it.w+'주차'} · ${it.t}</p>
+ <div class="urow"><input id="shU" value="${it.url}" readonly><button class="cp" id="shC">📋 주소 복사</button></div>
+ ${it.qr?`<div class="qrw"><img src="${it.qr}" alt="QR 코드"><p><b>📱 휴대폰으로 열기</b><br>카메라로 QR을 찍으면 바로 열려요.<br>화면에 띄워 학생들과 함께 써도 좋아요.</p></div>`:''}
+ ${navigator.share?'<button class="ns" id="shN">📤 카톡·문자 등 다른 앱으로 보내기</button>':''}</div>`;
+ mask.classList.add('on');const u=document.getElementById('shU'),c=document.getElementById('shC');u.onclick=()=>u.select();
+ c.onclick=async()=>{let ok=false;try{await navigator.clipboard.writeText(it.url);ok=true}catch(_){u.select();try{ok=document.execCommand('copy')}catch(__){}}
+  if(ok){c.textContent='✅ 복사됨';c.classList.add('ok');toast('✅ 주소를 복사했어요');setTimeout(()=>{c.textContent='📋 주소 복사';c.classList.remove('ok')},2500);}else{u.select();toast('주소를 선택했어요. Ctrl+C로 복사하세요');}};
+ const n=document.getElementById('shN');if(n)n.onclick=async()=>{try{await navigator.share({title:it.t,text:`${M.m} ${it.t}`,url:it.url})}catch(_){}};}
 function doAct(a,mi,ii){const it=D[mi].items[ii];
  if(a==='open') window.open(it.url,'_blank','noopener');
- else if(a==='share'){const data={title:it.t,text:`${D[mi].m} ${it.w}주차 교구 만들기 · ${it.t}`,url:it.url};
-  (async()=>{try{if(navigator.share){await navigator.share(data);return}}catch(_){return}
-   try{await navigator.clipboard.writeText(it.url)}catch(_){const t=document.createElement('textarea');t.value=it.url;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
-   toast('✅ 교재 주소를 복사했어요');})();}
+ else if(a==='share'){openShare(it,mi);}
  else{modal.style.setProperty('--c',D[mi].color);modal.innerHTML=`<button class="x" onclick="closeM()">×</button><h3>${it.t}</h3><p>${D[mi].short} ${it.w}주차 · 휴대폰 카메라로 찍으면 바로 열려요</p><img class="qrimg" src="${it.qr}" alt="QR 코드"><div class="url">${it.url}</div>`;mask.classList.add('on');}}
 function ask(a,mi,ii){const M=D[mi];
  return doAct(a,mi,ii);
