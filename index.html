@@ -10,7 +10,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdro
 .hin b{font-size:19px;letter-spacing:-.3px}
 .hin .sep{width:1px;height:20px;background:var(--line)}
 .hin small{color:var(--muted);font-size:14px;font-weight:600}
-.search{margin-left:12px;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:9px 16px;width:300px;color:var(--muted);font-size:14px}
+.search{margin-left:8px;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:9px 16px;width:300px;color:var(--muted);font-size:14px}
 .hero{background:linear-gradient(120deg,#22175e 0%,#5b4bdb 50%,#2f8fe0 100%);color:#fff;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 30%,rgba(255,255,255,.18),transparent 40%),radial-gradient(circle at 10% 120%,rgba(255,209,102,.25),transparent 45%)}
 .heroin{position:relative;max-width:1240px;margin:0 auto;padding:44px 24px 92px}
@@ -144,6 +144,24 @@ body.searching .vids{display:none}
 .modal.vmodal h3{font-size:18px;padding-right:40px}
 .vmacts{display:flex;justify-content:flex-end;margin-top:10px}.vmsh{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:800;color:var(--ink);cursor:pointer}.vmsh:hover{border-color:var(--c);color:var(--c)}.modal.vmodal p{margin-bottom:8px}
 @media (max-width:760px){.mhead{align-items:center}.vbtn{padding:10px 14px;font-size:14px}.gsub{font-size:11px}.vgrid{grid-template-columns:1fr}}
+/* 사용법·사이트맵 */
+.hbtn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;font-family:inherit}
+.hbtn:hover{border-color:var(--c,#1c6fd1);color:var(--c,#1c6fd1)}
+.modal.helpm{width:min(820px,100%);text-align:left;padding:22px 24px 20px;max-height:90vh;overflow:auto}
+.modal.helpm h3{font-size:20px;margin-bottom:12px;padding-right:36px}
+.htabs{display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.htabs span{font-size:14px;font-weight:800;color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}.htabs span.on{background:var(--ink);color:#fff}
+.hsec{display:none}.hsec.on{display:block}
+.hstep{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}.hstep:last-child{border:0}
+.hstep .n{flex:none;width:34px;height:34px;border-radius:10px;background:var(--c,#1c6fd1);color:#fff;font-weight:900;display:grid;place-items:center}
+.hstep b{display:block;font-size:15px}.hstep p{margin:2px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
+.smap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.smap .col{background:#f8faff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.smap h4{font-size:14px;margin:0 0 8px;display:flex;align-items:center;gap:6px}.smap h4 a{color:var(--ink);text-decoration:none}.smap h4 a:hover{text-decoration:underline}
+.smap ul{list-style:none;margin:0;padding:0}.smap li{font-size:13px;padding:5px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.smap li a{color:var(--c,#1c6fd1);font-weight:800;text-decoration:none}.smap li a:hover{text-decoration:underline}.smap li .st{font-size:11px;color:#9aa6bf;font-weight:700;white-space:nowrap}
+.smap .mo{font-size:12px;font-weight:900;color:var(--muted);margin:8px 0 2px}
+@media (max-width:760px){.smap{grid-template-columns:1fr}.hbtn span{display:none}.hbtn{padding:8px 10px}}
 /* modal */
 .mask{position:fixed;inset:0;background:rgba(10,18,40,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
 .mask.on{display:flex}
@@ -173,8 +191,8 @@ body.searching .vids{display:none}
  .qr.sh{padding:0 10px;font-size:13px}
 }
 html,body{overflow-x:hidden}
-</style></head><body>
-<header><div class="hin"><a id="homeA" href="./" title="홈으로"><img id="logo" alt="(주)코리아사이언스"></a><span class="sep"></span><b>항공드론과학 교구 제작</b><small>방과후 수업</small><nav class="seg"><a id="segTb" class="" href="https://ohaworld777.github.io/ks-web-textbook/">📘 수업 교재</a><a id="segKit" class="on" href="https://ohaworld777.github.io/ks-kit-making/">🛠️ 교구 제작</a></nav><label class="search">🔍 <input id="q" placeholder="교구 이름으로 찾기" autocomplete="off"></label></div></header>
+</style><script>window.__TBD=[{"key": "2027-1", "m": "2027년 1월", "short": "1월", "theme": "AI탐사로보", "sub": "감각에서 센서, 그리고 AI까지", "color": "#7c4dff", "icon": "🤖", "items": [{"w": 1, "t": "사람의 감각과 로봇의 감각", "kit": "AI탐사로보", "goal": "사람의 오감과 로봇의 센서를 비교해 보자", "r": "human-robot-senses", "url": "https://ohaworld777.github.io/human-robot-senses/", "kitgo": "ai-tamsarobo", "kitname": "AI탐사로보"}, {"w": 2, "t": "우리 주변의 소리를 이용한 센서", "kit": "AI탐사로보", "goal": "생활 속 소리 센서가 어떻게 쓰이는지 알아보자", "r": "sound-sensors-around-us", "url": "https://ohaworld777.github.io/sound-sensors-around-us/", "kitgo": "ai-tamsarobo", "kitname": "AI탐사로보"}, {"w": 3, "t": "소리의 원리와 AI 센서의 역할", "kit": "AI탐사로보", "goal": "소리의 원리와 AI 음성인식의 역할을 알아보자", "r": "sound-ai-sensor", "url": "https://ohaworld777.github.io/sound-ai-sensor/", "kitgo": "ai-tamsarobo", "kitname": "AI탐사로보"}, {"w": 4, "t": "교구활용 및 미션 수행", "kit": "AI탐사로보 로봇개", "goal": "로봇개에게 말로 명령해 미션을 수행해 보자", "mission": true, "url": "https://ohaworld777.github.io/robodog-mars/"}], "games": [{"t": "로봇개 화성기지 수비대", "sub": "음성인식 로봇개 · 3D 화성탐사 디펜스", "desc": "분화구에서 몰려오는 적을 막고, 화성 곳곳에 숨은 외계 게를 찾아 “발사”로 없애요. 로봇개에게 말이나 버튼으로 명령해요.", "url": "https://ohaworld777.github.io/robodog-mars/", "tb": "사람의 감각과 로봇의 감각", "r": "human-robot-senses", "wk": "1주차"}]}, {"key": "2027-2", "m": "2027년 2월", "short": "2월", "theme": "하늘에서 우주로", "sub": "비행의 원리에서 우주 탐사까지", "color": "#1c6fd1", "icon": "✈️", "items": [{"w": 1, "t": "항공기의 수평과 균형 조종", "kit": "미로찾기 구슬", "goal": "조종사가 비행기의 수평과 균형을 어떻게 유지하는지 배워 보자", "r": "aircraft-balance-control", "url": "https://ohaworld777.github.io/aircraft-balance-control/", "kitgo": "maze-marble", "kitname": "미로찾기 구슬"}, {"w": 2, "t": "비행혁신시대", "kit": "스핏파이어", "goal": "비행혁신시대에 대해 알아보자", "r": "flight-innovation-era", "url": "https://ohaworld777.github.io/flight-innovation-era/", "kitgo": "spitfire", "kitname": "스핏파이어"}, {"w": 3, "t": "최초의 동력비행", "kit": "플라이어호", "goal": "최초의 동력비행을 성공시킨 플라이어호에 대해 알아보자", "r": "first-powered-flight", "url": "https://ohaworld777.github.io/first-powered-flight/", "kitgo": "flyer", "kitname": "플라이어호"}, {"w": 4, "t": "우주의 멋진 사진들", "kit": "슈퍼히어로", "goal": "우주를 알아 가는 다양한 사진들을 살펴보자", "r": "amazing-space-photos", "url": "https://ohaworld777.github.io/amazing-space-photos/", "kitgo": "superhero", "kitname": "슈퍼히어로"}], "games": []}];window.__OTHER_PROMOS=[];</script></head><body>
+<header><div class="hin"><a id="homeA" href="./" title="홈으로"><img id="logo" alt="(주)코리아사이언스"></a><span class="sep"></span><b>항공드론과학 교구 제작</b><small>방과후 수업</small><nav class="seg"><a id="segTb" class="" href="https://ohaworld777.github.io/ks-web-textbook/">📘 수업 교재</a><a id="segKit" class="on" href="https://ohaworld777.github.io/ks-kit-making/">🛠️ 교구 제작</a></nav><button class="hbtn" id="helpBtn" type="button" title="홈페이지 사용법">❓<span> 사용법</span></button><button class="hbtn" id="mapBtn" type="button" title="사이트 맵">🗺️<span> 사이트 맵</span></button><label class="search">🔍 <input id="q" placeholder="교구 이름으로 찾기" autocomplete="off"></label></div></header>
 <section class="hero"><div class="heroin"><span class="kicker">2027 KIT MAKING</span><h1>이번 달 <span>교구</span>를 함께 만들어요</h1><p>달을 고르고, 교구 카드를 누르면 만들기 설명서가 열립니다. (달마다 교구 1~4개)</p></div></section>
 <main>
  <div class="tabs" id="tabs"></div>
@@ -285,4 +303,19 @@ document.addEventListener('click',()=>setTimeout(segSync,0));
   if(it.url){location.replace(it.url);return;}
   cur=mi;year=false;render();segSync();const el=document.querySelectorAll('#grid .card')[ii];if(el){el.classList.add('hl');el.scrollIntoView({behavior:'smooth',block:'center'});}
   toast('🛠️ '+it.t.replace(' 만들기','')+' 만들기는 아직 준비 중이에요');return;}})();
+
+function helpHtml(){const site="kit";const TB="https://ohaworld777.github.io/ks-web-textbook/",KIT="https://ohaworld777.github.io/ks-kit-making/";
+ const tbD=(typeof D!=='undefined'&&site==='tb')?D:(window.__TBD||null);
+ const kitD=(typeof D!=='undefined'&&site==='kit')?D:(window.__KITD||null);
+ const K=(typeof KITS!=='undefined')?KITS:{};
+ function tbCol(){if(!tbD)return `<div class="col"><h4>📘 <a href="${TB}" target="_blank">수업 교재 포털</a></h4><ul><li><a href="${TB}" target="_blank">열기 →</a></li></ul></div>`;
+  return `<div class="col"><h4>📘 <a href="${TB}" target="_blank">수업 교재 포털</a></h4>${tbD.map(M=>`<div class="mo">${M.m} · ${M.theme}</div><ul>${M.items.map(it=>`<li><span>${it.lab||it.w+'주차'} ${it.t}</span>${it.url?`<a href="${it.url}" target="_blank">열기 →</a>`:`<span class="st">준비 중</span>`}</li>`).join('')}${(M.games||[]).map(g=>`<li><span>🎮 ${g.t}</span><a href="${g.url}" target="_blank">게임 →</a></li>`).join('')}</ul>`).join('')}</div>`;}
+ function kitCol(){if(!kitD)return `<div class="col"><h4>🛠️ <a href="${KIT}" target="_blank">교구 제작 포털</a></h4><ul><li><a href="${KIT}" target="_blank">열기 →</a></li></ul></div>`;
+  return `<div class="col"><h4>🛠️ <a href="${KIT}" target="_blank">교구 제작 포털</a></h4>${kitD.map(M=>`<div class="mo">${M.m} · ${M.theme}</div><ul>${M.items.map(it=>`<li><span>${it.lab||it.w+'주차'} ${it.t}${it.mission?' (미션)':''}</span>${it.url?`<a href="${it.url}" target="_blank">열기 →</a>`:`<span class="st">준비 중</span>`}</li>${it.teaser?`<li><span>　🎬 ${it.t} 교구 소개</span><a href="${it.teaser.url}" target="_blank">영상 →</a></li>`:''}`).join('')}${((site==='kit'&&typeof PROMOS!=='undefined')?PROMOS:(window.__OTHER_PROMOS||[])).filter(p=>M.items.some(it=>it.slug===p.kit)).map(p=>`<li><span>　📣 ${p.title}</span><a href="${p.url}" target="_blank">영상 →</a></li>`).join('')}</ul>`).join('')}</div>`;}
+ return `<button class="x" onclick="closeM()">×</button><h3>❓ 홈페이지 사용법 · 사이트 맵</h3><div class="htabs"><span class="on" data-h="use">📖 사용법</span><span data-h="map">🗺️ 사이트 맵</span></div>
+ <div class="hsec on" id="h-use"><div class="hstep"><span class="n">1</span><div><b>달 고르기</b><p>위쪽 달 탭을 누르면 그 달에 만드는 교구가 카드로 보여요. 아직 안 나온 교구는 「준비 중」으로 표시돼요.</p></div></div><div class="hstep"><span class="n">2</span><div><b>제작 시작</b><p>「🛠️ 제작 시작」을 누르면 조립 설명서 페이지가 열려요. 2쪽의 「제작 영상」은 목차를 누르면 그 장면으로 바로 가고, 각 단계 쪽의 「🎬 영상으로 보기」로 그 단계만 볼 수 있어요.</p></div></div><div class="hstep"><span class="n">3</span><div><b>교구 소개·홍보 영상</b><p>카드 아래 「🎬 교구 소개」, 「📣 홍보 영상」을 누르면 짧은 영상이 바로 재생돼요.</p></div></div><div class="hstep"><span class="n">4</span><div><b>수업 교재로 이동</b><p>위쪽 「📘 수업 교재」 버튼이나 카드 아래 「교재」 링크로 그 교구와 이어지는 수업 교재로 넘어가요.</p></div></div><div class="hstep"><span class="n">5</span><div><b>공유·QR</b><p>「🔗 공유」로 주소 복사와 QR을 쓸 수 있어요. 영상에도 공유 버튼이 있어요.</p></div></div><div class="hstep"><span class="n">6</span><div><b>PPT 받기</b><p>제작 페이지 안 「🔒 PPT 다운로드」에서 비밀번호를 넣으면 설명서 PPT를 받을 수 있어요(교사용).</p></div></div></div>
+ <div class="hsec" id="h-map"><div class="smap">${site==='tb'?tbCol()+kitCol():kitCol()+tbCol()}</div><p style="margin:12px 0 0;font-size:12px;color:var(--muted)">비밀번호가 필요한 PPT 다운로드는 각 페이지 안에서만 할 수 있어요.</p></div>`;}
+function openHelp(tab){modal.className='modal helpm';modal.innerHTML=helpHtml();mask.classList.add('on');modal.querySelectorAll('.htabs span').forEach(sp=>sp.onclick=()=>{modal.querySelectorAll('.htabs span').forEach(x=>x.classList.toggle('on',x===sp));modal.querySelectorAll('.hsec').forEach(x=>x.classList.toggle('on',x.id==='h-'+sp.dataset.h));});if(tab==='map')modal.querySelector('[data-h=map]').click();}
+document.getElementById('helpBtn').onclick=()=>openHelp('use');document.getElementById('mapBtn').onclick=()=>openHelp('map');
+if(new URLSearchParams(location.search).get('help'))setTimeout(()=>openHelp(new URLSearchParams(location.search).get('help')),200);
 </script></body></html>
