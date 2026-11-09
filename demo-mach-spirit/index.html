@@ -441,5 +441,16 @@ const _kvR=render;render=function(){_kvR();kvAfter();};render();
 </script><!--/KV--><!--XLINK--><script>window.NEXTACT="<a class=\"nextact\" href=\"https://ohaworld777.github.io/flight-innovation-era/\" target=\"_blank\" rel=\"noopener\"><small>배운 원리 다시 보기</small><b>📘 비행혁신시대 →</b></a>";
 (function(){const lg=document.querySelector('.brand .logo');if(lg){lg.title='포털로 돌아가기';lg.onclick=()=>location.href="https://ohaworld777.github.io/ks-kit-making/?m=2027-2";}
 const b=document.getElementById('xBtn'),m=document.getElementById('xMenu');if(b&&m){b.onclick=e=>{e.stopPropagation();m.classList.toggle('on');};document.addEventListener('click',()=>m.classList.remove('on'));}
-if(typeof render==='function'&&i===P.length-1)render();})();</script><!--/XLINK--></body>
+if(typeof render==='function'&&i===P.length-1)render();})();</script><!--/XLINK--><!--SWIPE--><script>
+(function(){let x0=0,y0=0,t0=0,ok=false;
+ const BLOCK='#dots,#progress,input,textarea,select,button,a,[data-noswipe],.kbmask,.ksm,#pop,.tzm,.kvm,#kvm,#menu';
+ const OPEN='#pop:not([hidden]),.ksm.on,.kbmask.on,.tzm.on,.kvm.on,#kvm.on,#menu.open,.mask.on';
+ document.addEventListener('touchstart',e=>{ok=false;if(e.touches.length!==1)return;
+  if(e.target.closest&&e.target.closest(BLOCK))return; if(document.querySelector(OPEN))return;
+  const t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();ok=true;},{passive:true});
+ document.addEventListener('touchmove',e=>{if(e.touches.length!==1)ok=false;},{passive:true});
+ document.addEventListener('touchend',e=>{if(!ok)return;ok=false;const t=e.changedTouches[0];const dx=t.clientX-x0,dy=t.clientY-y0;
+  if(Date.now()-t0>800||Math.abs(dx)<60||Math.abs(dx)<Math.abs(dy)*1.4)return;
+  if(dx<0){if(typeof next==='function')next();}else{if(typeof prev==='function')prev();}},{passive:true});
+})();</script><!--/SWIPE--></body>
 </html>
