@@ -140,7 +140,8 @@ body.searching .vids{display:none}
 .vcard.soon .vb{flex-direction:row;align-items:center;gap:14px;padding:16px 20px}.vcard.soon .ic{font-size:30px}.vcard.soon h3{font-size:16px}.vcard.soon p{color:var(--muted)}
 .vmodal .vf{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;margin-top:4px}.vmodal .vf iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .modal.vmodal{width:min(960px,100%);text-align:left;padding:18px 18px 16px}
-.modal.vmodal h3{font-size:18px;padding-right:40px}.modal.vmodal p{margin-bottom:8px}
+.modal.vmodal h3{font-size:18px;padding-right:40px}
+.vmacts{display:flex;justify-content:flex-end;margin-top:10px}.vmsh{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:800;color:var(--ink);cursor:pointer}.vmsh:hover{border-color:var(--c);color:var(--c)}.modal.vmodal p{margin-bottom:8px}
 @media (max-width:760px){.mhead{align-items:center}.vbtn{padding:10px 14px;font-size:14px}.gsub{font-size:11px}.vgrid{grid-template-columns:1fr}}
 /* modal */
 .mask{position:fixed;inset:0;background:rgba(10,18,40,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
@@ -245,7 +246,7 @@ function vcard(v,k){return `<div class="vcard"><div class="vf" data-vf="${k}" st
 function vidsHtml(){const T=ALLV.filter(v=>v.kind==='teaser'),P=ALLV.filter(v=>v.kind==='promo');
  return (T.length?`<h3 class="vh">🎬 <em>교구 소개 영상</em><small>교구가 어떤 건지 미리 보는 짧은 티저</small></h3><div class="vgrid">${T.map(v=>vcard(v,ALLV.indexOf(v))).join('')}</div>`:'')
   +(P.length?`<h3 class="vh">📣 <em>홍보 영상</em><small>새 영상이 생길 때마다 추가돼요</small></h3><div class="vgrid">${P.map(v=>vcard(v,ALLV.indexOf(v))).join('')}</div>`:'');}
-function openVideo(url,title,sub){modal.className='modal vmodal';modal.innerHTML=`<button class="x" onclick="closeM()">×</button><h3>${title}</h3>${sub?`<p class="sub">${sub}</p>`:''}<div class="vf"><iframe src="${embedUrl(url,true)}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div>`;mask.classList.add('on');}
+function openVideo(url,title,sub){modal.className='modal vmodal';modal.innerHTML=`<button class="x" onclick="closeM()">×</button><h3>${title}</h3>${sub?`<p class="sub">${sub}</p>`:''}<div class="vf"><iframe src="${embedUrl(url,true)}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div><div class="vmacts"><button class="vmsh" type="button">🔗 영상 주소 공유</button></div>`;modal.querySelector('.vmsh').onclick=()=>openShare({t:title,url:url,lab:'영상',w:''},cur);mask.classList.add('on');}
 function doAct(a,mi,ii){const it=D[mi].items[ii];
  if(a==='teaser'){openVideo(it.teaser.url,(it.teaser.title||it.t.replace(' 만들기','')+' 소개 영상'),`${D[mi].short} · ${it.kit||''}`);return;}
  if(a==='open') window.open(it.url,'_blank','noopener');
