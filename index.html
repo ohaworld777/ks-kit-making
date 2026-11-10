@@ -269,7 +269,7 @@ function sha256(s){const K=[],H=[];let n=2,c=0;const isP=x=>{for(let f=2;f*f<=x;
 const unlocked={};try{Object.assign(unlocked,JSON.parse(sessionStorage.getItem('ksU')||'{}'))}catch(e){}
 function saveU(){try{sessionStorage.setItem('ksU',JSON.stringify(unlocked))}catch(e){}}
 // 시작 달: 접속한 달이 커리큘럼에 있으면 그 달, 아니면 첫 달
-let cur=0;{if(new URLSearchParams(location.search).get('v')==='videos')setTimeout(()=>{vidMode=true;render();},0);const now=new Date(),key=`${now.getFullYear()}-${now.getMonth()+1}`;const k=D.findIndex(x=>x.key===key);if(k>=0)cur=k;const qs=new URLSearchParams(location.search),qm=qs.get('m');if(qm!==null){const qk=D.findIndex(x=>x.key===qm);if(qk>=0)cur=qk;else if(D[+qm])cur=+qm;}}
+let cur=0;{if(new URLSearchParams(location.search).get('v')==='videos')setTimeout(()=>{vidMode=true;render();},0);/*PMONTH*/const monthIdx=t=>{const z=new Date(t.getTime()+9*3600e3),n=z.getUTCFullYear()*12+z.getUTCMonth()+1;const L=D.map((x,i)=>{const a=String(x.key).split('-').map(Number);return {i,n:a[0]*12+a[1]}}).sort((a,b)=>a.n-b.n);const p=L.find(x=>x.n===n)||L.find(x=>x.n>n)||L[L.length-1];return p?p.i:0;};cur=monthIdx(new Date());const qs=new URLSearchParams(location.search),qm=qs.get('m');if(qm!==null){const qk=D.findIndex(x=>x.key===qm);if(qk>=0)cur=qk;else if(D[+qm])cur=+qm;}else{try{fetch(location.href.split('#')[0],{method:'HEAD',cache:'no-store'}).then(r=>{const d=r.headers.get('date');if(!d||isNaN(Date.parse(d)))return;const i=monthIdx(new Date(d));if(i!==cur&&!window.__tabTouched){cur=i;if(typeof render==='function')render();if(typeof segSync==='function')segSync();}}).catch(()=>{})}catch(_){}}}
 let year=false,vidMode=false;
 const ALL=D.flatMap((M,mi)=>M.items.map((it,ii)=>({...it,mi,ii})));
 function vidRow(it){const pr=(PROMOS||[]).filter(p=>p.kit===it.slug);if(it.mission)return '';
@@ -340,7 +340,7 @@ function ask(a,mi,ii){const M=D[mi];
 document.addEventListener('click',e=>{if(e.target.closest('#vidTab')){vidMode=!vidMode;year=false;render();return;}
  const vf=e.target.closest('.vf[data-vf]');if(vf){const v=ALLV[+vf.dataset.vf];vf.innerHTML=playerHtml(v.url,true);vf.style.cursor='default';vf.removeAttribute('data-vf');return;}
  const vs=e.target.closest('.vsh');if(vs){const v=ALLV[+vs.dataset.k];openShare({t:v.title,url:v.url,lab:v.kind==='teaser'?'교구 소개 영상':'홍보 영상',w:''},v.mi||0);return;}
- const t=e.target.closest('[data-tab]');if(t){cur=+t.dataset.tab;year=false;vidMode=false;render();return}
+ const t=e.target.closest('[data-tab]');if(t){window.__tabTouched=true;cur=+t.dataset.tab;year=false;vidMode=false;render();return}
  const b=e.target.closest('[data-a]');if(b){ask(b.dataset.a,+b.dataset.m,+b.dataset.i);}});
 document.getElementById('vMonth').onclick=()=>{year=false;vidMode=false;render()};document.getElementById('vYear').onclick=()=>{year=true;vidMode=false;render()};
 document.getElementById('q').addEventListener('input',render);
