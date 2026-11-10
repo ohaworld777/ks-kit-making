@@ -30,7 +30,7 @@ main{flex:1;min-height:0;display:flex}
 #ctl #play{background:var(--blue);color:#fff;font-size:15px}#ctl button.on{background:var(--or);color:#fff}
 #scrub{flex:1;min-width:40px;accent-color:var(--blue)}
 #vbtn{position:absolute;right:14px;bottom:14px}
-#view{position:absolute;right:14px;top:46px;font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+#view.off{display:none}#view{position:absolute;right:14px;top:46px;font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
 #load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:800;color:var(--mut);background:#eef3fb;z-index:3;line-height:1.7}
 #panel{flex:1;max-width:470px;min-width:340px;overflow:auto;background:#fff;border-left:1px solid var(--line);padding:20px 22px 28px;overscroll-behavior:contain}
 .kick{font-size:12.5px;font-weight:800;color:var(--blue)}
@@ -92,7 +92,7 @@ nav button{height:48px;border-radius:14px;font-weight:900;font-size:16px}
 <div class="prog"><div id="bar"><i></i></div><span id="pct">0 / 34</span><button id="menu">☰ 목록</button></div></header>
 <main>
  <section id="stage"><canvas id="cv"></canvas><div id="load"><div>3D 모델을 불러오는 중…<br><b></b></div></div>
-  <div id="where">준비</div><div id="hint">👆 손가락으로 돌려 보세요</div><button id="view">시점 처음으로</button>
+  <div id="where">준비</div><div id="hint">👆 손가락으로 돌려 보세요</div><button id="view" class="off" title="돌리거나 확대한 화면을 처음 보던 방향으로 되돌려요">↺ 처음 방향으로</button>
   <div id="ctl"><button id="play" aria-label="재생/멈춤">⏸</button><button id="replay" aria-label="다시 보기">↺</button><input id="scrub" type="range" min="0" max="1000" value="0" aria-label="결합 장면 위치"><button id="slow">천천히</button></div>
  </section>
  <article id="panel"></article>
@@ -100,5 +100,5 @@ nav button{height:48px;border-radius:14px;font-weight:900;font-size:16px}
 <nav><button id="prev">◀ 이전</button><button id="next">다음 ▶</button></nav>
 <div id="drawer"><div class="in"><div class="hd"><span>단계 목록</span><button id="dclose" aria-label="닫기">×</button></div><div id="list"></div>
 <p class="cs">(주)코리아사이언스 고객센터 <a href="tel:051-514-0777">051-514-0777</a><br>AM 09:30 ~ PM 17:30 · 토·일·공휴일 휴무</p></div></div>
-<script type="module" src="app.js?v=12"></script>
+<script type="module" src="app.js?v=13"></script>
 </body></html>
