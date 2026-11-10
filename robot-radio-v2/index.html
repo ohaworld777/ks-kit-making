@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>로봇 라디오 만들기 · KOREA SCIENCE</title>
+<meta name="description" content="돌려 보는 3D 결합 장면으로 따라 만드는 로봇 라디오 교구 제작 설명서">
+<meta name="theme-color" content="#1c6fd1">
+<style>
+:root{--ink:#14213f;--mut:#5d6b86;--line:#e3e9f4;--bg:#f4f7fc;--blue:#1c6fd1;--vio:#7c4dff;--or:#ff7a1a}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;color:var(--ink);background:var(--bg);display:flex;flex-direction:column;height:100dvh;overflow:hidden;-webkit-tap-highlight-color:transparent;word-break:keep-all}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+header{flex:none;display:flex;align-items:center;gap:12px;padding:8px 16px;background:#fff;border-bottom:1px solid var(--line)}
+header a.home{font-weight:900;font-size:13px;color:var(--blue);text-decoration:none;white-space:nowrap}
+header .ti{font-weight:900;font-size:16px;white-space:nowrap}
+#secs{display:flex;gap:6px;margin-left:8px;overflow:auto;scrollbar-width:none}
+#secs button{font-size:12.5px;font-weight:800;padding:6px 10px;border-radius:999px;background:#eef2fa;color:var(--mut);white-space:nowrap}
+#secs button.on{background:var(--ink);color:#fff}#secs button.ok:not(.on){background:#e2f6e9;color:#16803c}
+.prog{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+#bar{width:120px;height:8px;border-radius:9px;background:#e6ecf7;overflow:hidden}#bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--vio));transition:width .3s}
+#pct{font-size:12px;font-weight:800;color:var(--mut);white-space:nowrap}
+#menu{font-size:13px;font-weight:800;padding:7px 12px;border-radius:10px;background:#eef2fa;white-space:nowrap}
+main{flex:1;min-height:0;display:flex}
+#stage{position:relative;flex:1.4;min-width:0;background:radial-gradient(120% 90% at 50% 35%,#ffffff 0,#eaf1fb 60%,#dbe6f6 100%)}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}#cv:active{cursor:grabbing}
+#where{position:absolute;left:14px;top:12px;font-weight:900;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+#hint{position:absolute;right:14px;top:12px;font-size:12px;font-weight:700;color:var(--mut);background:#ffffffd9;border-radius:999px;padding:6px 12px;transition:opacity .4s}#hint.off{opacity:0}
+#ctl{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 10px;box-shadow:0 6px 20px #1421401a;width:min(520px,calc(100% - 24px))}
+#ctl.off{display:none}
+#ctl button{flex:none;min-width:38px;height:38px;border-radius:999px;font-size:14px;font-weight:800;background:#eef2fa;padding:0 10px}
+#ctl #play{background:var(--blue);color:#fff;font-size:15px}#ctl button.on{background:var(--or);color:#fff}
+#scrub{flex:1;min-width:40px;accent-color:var(--blue)}
+#vbtn{position:absolute;right:14px;bottom:14px}
+#view{position:absolute;right:14px;top:46px;font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+#load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:800;color:var(--mut);background:#eef3fb;z-index:3;line-height:1.7}
+#panel{flex:1;max-width:470px;min-width:340px;overflow:auto;background:#fff;border-left:1px solid var(--line);padding:20px 22px 28px;overscroll-behavior:contain}
+.kick{font-size:12.5px;font-weight:800;color:var(--blue)}
+h1{font-size:23px;line-height:1.3;margin:6px 0 4px;font-weight:900;display:flex;gap:10px;align-items:center}
+h1 .no{flex:none;width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--vio));color:#fff;display:grid;place-items:center;font-size:18px}
+h3{font-size:13.5px;margin:18px 0 8px;font-weight:900;color:var(--mut)}h3 small{font-weight:600;color:#8e9ab4}
+.lead{font-size:15.5px;line-height:1.7;margin:8px 0}.mut{color:var(--mut);font-size:14px;margin:0}
+.how3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.how3 div{background:#f1f5fd;border-radius:12px;padding:10px;font-size:13px;font-weight:700;text-align:center}.how3 b{display:block;color:var(--blue);font-size:16px}
+.tools{display:flex;flex-wrap:wrap;gap:6px}.tools span{font-size:13.5px;font-weight:700;background:#f1f5fd;border-radius:999px;padding:6px 11px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.pc{border:1px solid var(--line);border-radius:12px;padding:6px 4px 8px;text-align:center;background:#fff;position:relative}
+.pc .im{position:relative;aspect-ratio:1;display:grid;place-items:center;background:#f6f9fe;border-radius:9px;margin-bottom:5px;overflow:hidden}
+.pc .im img{width:100%;height:100%;display:block}.pc .im span{font-size:34px}
+.pc i{position:absolute;left:4px;top:4px;font-style:normal;font-size:11.5px;font-weight:900;min-width:21px;height:21px;border-radius:11px;background:var(--ink);color:#fff;display:grid;place-items:center;padding:0 4px}
+.pc b{display:block;font-size:12.5px;line-height:1.25}.pc em{font-style:normal;font-size:11px;font-weight:800;color:#b25a00;background:#fff0dc;border-radius:99px;padding:1px 7px;display:inline-block;margin-top:3px}
+.grid.sm{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+ol.how{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.how li{counter-increment:s;position:relative;padding:9px 0 9px 36px;font-size:15.5px;line-height:1.65;border-bottom:1px dashed var(--line)}ol.how li:last-child{border:0}
+ol.how li:before{content:counter(s);position:absolute;left:0;top:10px;width:25px;height:25px;border-radius:50%;background:#e8f0fd;color:var(--blue);font-weight:900;font-size:13px;display:grid;place-items:center}
+.box{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:14.5px;line-height:1.65;background:#f1f5fd}
+.box b{display:block;font-size:13.5px;margin-bottom:2px}.box b b,.box li b,.box p b{display:inline;font-size:inherit}
+.box ul,.box ol{margin:0;padding-left:18px}.box p{margin:0}
+.box.warn{background:#fff1ee}.box.warn>b{color:#c5321b}.box.miss{background:#fff8e3}.box.miss>b{color:#9a6400}.box.tip{background:#eafaf0}.box.tip>b{color:#16803c}
+details.deep{margin-top:12px;border:1.5px solid #d9d0ff;border-radius:14px;background:#faf8ff}
+details.deep summary{cursor:pointer;padding:12px 14px;font-weight:900;font-size:14px;color:#5a35d6;list-style:none}details.deep summary::-webkit-details-marker{display:none}
+details.deep summary:after{content:"펼치기 ▾";float:right;font-size:12px;font-weight:700;color:#8e7fd0}details.deep[open] summary:after{content:"접기 ▴"}
+details.deep>div{padding:0 14px 14px;font-size:14.5px;line-height:1.75}details.deep ul{margin:0;padding-left:18px}
+.sci{display:grid;gap:8px}.sci div{background:#f1f5fd;border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.6}.sci b{display:block}
+.chk{display:block;width:100%;margin-top:18px;padding:14px;border-radius:14px;font-weight:900;font-size:16px;background:#fff;border:2px solid var(--blue);color:var(--blue)}
+.chk.on{background:#16a34a;border-color:#16a34a;color:#fff}
+nav{flex:none;display:flex;gap:10px;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+nav button{height:48px;border-radius:14px;font-weight:900;font-size:16px}
+#prev{flex:1;background:#eef2fa}#prev:disabled{opacity:.35}
+#next{flex:2;background:linear-gradient(135deg,var(--blue),var(--vio));color:#fff}
+#next.pulse{animation:pu 1s infinite}@keyframes pu{50%{box-shadow:0 0 0 7px #1c6fd133}}
+#drawer{position:fixed;inset:0;z-index:20;background:#14213f66;display:none}#drawer.on{display:block}
+#drawer .in{position:absolute;right:0;top:0;bottom:0;width:min(360px,88vw);background:#fff;padding:14px 14px 30px;overflow:auto}
+#drawer .hd{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:6px}#dclose{font-size:20px;width:38px;height:38px;border-radius:50%;background:#eef2fa}
+#list h4{margin:14px 4px 4px;font-size:12.5px;color:var(--mut)}
+#list button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 8px;border-radius:10px;font-size:14.5px;font-weight:700}
+#list button i{flex:none;font-style:normal;width:26px;height:26px;border-radius:50%;background:#eef2fa;display:grid;place-items:center;font-size:12.5px;font-weight:900}
+#list button.on{background:#e8f0fd}#list button.ok i{background:#16a34a;color:#fff}
+.cs{font-size:11px;color:#a3adc2;text-align:center;margin-top:22px;line-height:1.6}.cs a{color:inherit}
+@media (max-width:820px){
+ main{flex-direction:column}#stage{flex:none;height:43dvh}#panel{max-width:none;min-width:0;border-left:0;border-top:1px solid var(--line);padding:14px 16px 24px}
+ header{padding:7px 10px;gap:8px}header .ti{font-size:14.5px}#secs{display:none}#bar{width:64px}h1{font-size:20px}
+ header a.home{display:none}#hint{font-size:11px}#ctl{bottom:8px}
+}
+.pc .im img.gl{width:78%;height:auto;margin:auto}
+.tools span img{height:20px;vertical-align:-5px}
+.box.gluebox{display:flex;gap:12px;align-items:center;background:#f3f6fb;border:1.5px solid #d5deee;margin-top:12px}
+.box.gluebox img{flex:none;width:62px}.box.gluebox>div>b{color:#14213f}
+.box.gluebox small{display:block;margin-top:4px;font-size:12.5px;color:#5d6b86;font-weight:700}
+.box.gluebox small i{display:inline-block;width:11px;height:11px;border-radius:50%;background:#fff;border:1.5px solid #9aa7c0;margin-right:6px;vertical-align:-1px}
+.noglue{margin:12px 0 0;font-size:13px;color:#8e9ab4;font-weight:700}
+</style></head>
+<body>
+<header><a class="home" href="../">← 교구 제작</a><div class="ti">📻 로봇 라디오 만들기</div><div id="secs"></div>
+<div class="prog"><div id="bar"><i></i></div><span id="pct">0 / 35</span><button id="menu">☰ 목록</button></div></header>
+<main>
+ <section id="stage"><canvas id="cv"></canvas><div id="load"><div>3D 모델을 불러오는 중…<br><b></b></div></div>
+  <div id="where">준비</div><div id="hint">👆 손가락으로 돌려 보세요</div><button id="view">시점 처음으로</button>
+  <div id="ctl"><button id="play" aria-label="재생/멈춤">⏸</button><button id="replay" aria-label="다시 보기">↺</button><input id="scrub" type="range" min="0" max="1000" value="0" aria-label="결합 장면 위치"><button id="slow">천천히</button></div>
+ </section>
+ <article id="panel"></article>
+</main>
+<nav><button id="prev">◀ 이전</button><button id="next">다음 ▶</button></nav>
+<div id="drawer"><div class="in"><div class="hd"><span>단계 목록</span><button id="dclose" aria-label="닫기">×</button></div><div id="list"></div>
+<p class="cs">(주)코리아사이언스 고객센터 <a href="tel:051-514-0777">051-514-0777</a><br>AM 09:30 ~ PM 17:30 · 토·일·공휴일 휴무</p></div></div>
+<script type="module" src="app.js?v=8"></script>
+</body></html>
